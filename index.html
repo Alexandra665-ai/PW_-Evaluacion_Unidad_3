@@ -8,198 +8,90 @@
 </head>
 <body>
 
-  <header class="header">
-    <div>
-      <h1>🐾 Adopta un Amigo</h1>
-      <p class="subtitle">Mini app para publicar y encontrar mascotas en adopción</p>
+<header class="header">
+  <div>
+    <h1>🐾 Adopta un Amigo</h1>
+    <p class="subtitle">Aplicación para publicar y encontrar mascotas en adopción</p>
+  </div>
+  <button id="btn-mostrar-form" class="btn-header">➕ Publicar mascota</button>
+</header>
+
+<main class="container">
+
+  <section class="panel-principal">
+    <div class="panel-texto">
+      <span class="badge">Adopción responsable</span>
+      <h2>Encuentra una mascota que busca hogar</h2>
+      <p>Revisa las mascotas publicadas, filtra por tipo y solicita la adopción.</p>
     </div>
 
-    <button id="btn-mostrar-form" class="btn-header">➕ Publicar mascota</button>
-  </header>
+    <div class="panel-imagen">
+      <img src="img/hero.jpg" alt="Mascotas en adopción">
+    </div>
 
-  <main class="container">
+    <div class="resumen">
+      <div class="resumen-card"><strong id="total-mascotas">0</strong><span>Total</span></div>
+      <div class="resumen-card"><strong id="total-disponibles">0</strong><span>Disponibles</span></div>
+      <div class="resumen-card"><strong id="total-adoptadas">0</strong><span>Adoptadas</span></div>
+    </div>
+  </section>
 
-    <section class="panel-principal">
-      <div class="panel-texto">
-        <span class="badge">Adopción responsable</span>
-        <h2>Encuentra una mascota que busca hogar</h2>
-        <p>Revisa las mascotas publicadas, filtra por tipo y marca cuando una mascota ya fue adoptada.</p>
-      </div>
+  <section id="form-section" class="form-section oculto">
+    <div class="titulo-form">
+      <h2>Publicar mascota en adopción</h2>
+      <button id="btn-cerrar-form" type="button" class="btn-cerrar">X</button>
+    </div>
 
-      <div class="panel-imagen">
-        <img src="img/hero.jpg" alt="Mascotas en adopción">
-      </div>
+    <form id="mascota-form" novalidate>
+      <div class="campo"><label for="nombre">Nombre</label><input id="nombre" type="text" placeholder="Ej: Firulais"><span id="error-nombre" class="error-msg"></span></div>
+      <div class="campo"><label for="tipo">Tipo de animal</label><select id="tipo"><option value="">-- Selecciona --</option><option value="perro">Perro</option><option value="gato">Gato</option><option value="conejo">Conejo</option><option value="ave">Ave</option><option value="otro">Otro</option></select><span id="error-tipo" class="error-msg"></span></div>
+      <div class="campo"><label for="edad">Edad aproximada</label><input id="edad" type="number" min="0" max="25" placeholder="Ej: 2"><span id="error-edad" class="error-msg"></span></div>
+      <div class="campo"><label for="ciudad">Ciudad</label><input id="ciudad" type="text" placeholder="Ej: Iquique"><span id="error-ciudad" class="error-msg"></span></div>
+      <div class="campo"><label for="email">Email de contacto</label><input id="email" type="text" placeholder="tucorreo@ejemplo.com"><span id="error-email" class="error-msg"></span></div>
+      <div class="campo"><label for="confirmarEmail">Confirmar email</label><input id="confirmarEmail" type="text" placeholder="Repite el correo"><span id="error-confirmarEmail" class="error-msg"></span></div>
+      <div class="campo"><label for="telefono">Teléfono</label><input id="telefono" type="text" placeholder="Ej: +56 9 1234 5678"><span id="error-telefono" class="error-msg"></span></div>
+      <div class="campo"><label for="foto">Foto</label><input id="foto" type="file" accept="image/*"><span id="error-foto" class="error-msg"></span></div>
 
-      <div class="resumen">
-        <div class="resumen-card">
-          <strong id="total-mascotas">0</strong>
-          <span>Total</span>
-        </div>
+      <button type="submit" class="btn-primario">Publicar mascota</button>
+    </form>
+  </section>
 
-        <div class="resumen-card">
-          <strong id="total-disponibles">0</strong>
-          <span>Disponibles</span>
-        </div>
+  <section class="lista-section">
+    <div class="titulo-lista">
+      <h2>Mascotas publicadas</h2>
+      <p>Busca, filtra y solicita la adopción de una mascota.</p>
+    </div>
 
-        <div class="resumen-card">
-          <strong id="total-adoptadas">0</strong>
-          <span>Adoptadas</span>
-        </div>
-      </div>
-    </section>
+    <div class="filtros">
+      <input type="text" id="buscador" placeholder="🔎 Buscar por nombre...">
+      <select id="filtro-tipo"><option value="todos">Todos los tipos</option><option value="perro">Perro</option><option value="gato">Gato</option><option value="conejo">Conejo</option><option value="ave">Ave</option><option value="otro">Otro</option></select>
+      <select id="filtro-estado"><option value="todos">Todos los estados</option><option value="disponible">Disponible</option><option value="adoptado">Adoptado</option></select>
+    </div>
 
-    <section id="form-section" class="form-section oculto">
-      <div class="titulo-form">
-        <h2>Publicar mascota en adopción</h2>
-        <button id="btn-cerrar-form" type="button" class="btn-cerrar">X</button>
-      </div>
+    <div id="lista-contenedor" class="lista-contenedor"></div>
+    <p id="lista-vacia" class="lista-vacia">Todavía no hay mascotas publicadas 🐶🐱</p>
+  </section>
 
-      <form id="mascota-form" novalidate>
-        <div class="campo">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ej: Firulais">
-          <span class="error-msg" id="error-nombre"></span>
-        </div>
-
-        <div class="campo">
-          <label for="tipo">Tipo de animal</label>
-          <select id="tipo" name="tipo">
-            <option value="">-- Selecciona --</option>
-            <option value="perro">Perro</option>
-            <option value="gato">Gato</option>
-            <option value="conejo">Conejo</option>
-            <option value="ave">Ave</option>
-            <option value="otro">Otro</option>
-          </select>
-          <span class="error-msg" id="error-tipo"></span>
-        </div>
-
-        <div class="campo">
-          <label for="edad">Edad aproximada</label>
-          <input type="number" id="edad" name="edad" min="0" max="25" placeholder="Ej: 2">
-          <span class="error-msg" id="error-edad"></span>
-        </div>
-
-        <div class="campo">
-          <label for="ciudad">Ciudad</label>
-          <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Iquique">
-          <span class="error-msg" id="error-ciudad"></span>
-        </div>
-
-        <div class="campo">
-          <label for="email">Email de contacto</label>
-          <input type="text" id="email" name="email" placeholder="tucorreo@ejemplo.com">
-          <span class="error-msg" id="error-email"></span>
-        </div>
-
-        <div class="campo">
-          <label for="confirmarEmail">Confirmar email</label>
-          <input type="text" id="confirmarEmail" name="confirmarEmail" placeholder="Repite el correo">
-          <span class="error-msg" id="error-confirmarEmail"></span>
-        </div>
-
-        <div class="campo">
-          <label for="telefono">Teléfono de contacto</label>
-          <input type="text" id="telefono" name="telefono" placeholder="Ej: +56 9 1234 5678">
-          <span class="error-msg" id="error-telefono"></span>
-        </div>
-
-        <div class="campo">
-          <label for="foto">Foto de la mascota</label>
-          <input type="file" id="foto" name="foto" accept="image/*">
-          <span class="error-msg" id="error-foto"></span>
-        </div>
-
-        <button type="submit" class="btn-primario">Publicar mascota</button>
-      </form>
-    </section>
-
-    <section class="lista-section">
-      <div class="titulo-lista">
-        <h2>Mascotas publicadas</h2>
-        <p>Busca, filtra y actualiza el estado de adopción.</p>
-      </div>
-
-      <div class="filtros">
-        <input type="text" id="buscador" placeholder="🔎 Buscar por nombre...">
-
-        <select id="filtro-tipo">
-          <option value="todos">Todos los tipos</option>
-          <option value="perro">Perro</option>
-          <option value="gato">Gato</option>
-          <option value="conejo">Conejo</option>
-          <option value="ave">Ave</option>
-          <option value="otro">Otro</option>
-        </select>
-
-        <select id="filtro-estado">
-          <option value="todos">Todos los estados</option>
-          <option value="disponible">Disponible</option>
-          <option value="adoptado">Adoptado</option>
-        </select>
-      </div>
-
-      <div id="lista-contenedor" class="lista-contenedor"></div>
-
-      <p id="lista-vacia" class="lista-vacia">Todavía no hay mascotas publicadas 🐶🐱</p>
-    </section>
-
-  </main>
-
-  
+</main>
 
 <div id="modal-adopcion" class="modal oculto">
-
-    <div class="modal-contenido">
-
-        <div class="modal-header">
-            <h2>Solicitar adopción</h2>
-
-            <button id="cerrar-modal" class="btn-cerrar">
-                ✕
-            </button>
-        </div>
-
-        <p class="modal-texto">
-            Completa tus datos para que el responsable de la mascota se comunique contigo.
-        </p>
-
-        <form id="form-adopcion">
-
-            <div class="campo">
-                <label>Nombre completo</label>
-                <input
-                    type="text"
-                    id="nombreInteresado"
-                    required>
-            </div>
-
-            <div class="campo">
-                <label>Teléfono</label>
-                <input
-                    type="tel"
-                    id="telefonoInteresado"
-                    placeholder="+56 9 1234 5678"
-                    required>
-            </div>
-
-            <div class="campo">
-                <label>Correo</label>
-                <input
-                    type="email"
-                    id="correoInteresado"
-                    required>
-            </div>
-
-            <button class="btn-primario" type="submit">
-                Enviar solicitud
-            </button>
-
-        </form>
-
+  <div class="modal-contenido">
+    <div class="modal-header">
+      <h2>Solicitar adopción</h2>
+      <button id="cerrar-modal" class="btn-cerrar" type="button">X</button>
     </div>
 
+    <p class="modal-texto">Completa tus datos para que el responsable de la mascota se comunique contigo.</p>
+
+    <form id="form-adopcion">
+      <div class="campo"><label>Nombre completo</label><input type="text" id="nombreInteresado" required></div>
+      <div class="campo"><label>Teléfono</label><input type="tel" id="telefonoInteresado" placeholder="+56 9 1234 5678" required></div>
+      <div class="campo"><label>Correo</label><input type="email" id="correoInteresado" required></div>
+      <button class="btn-primario" type="submit">Enviar solicitud</button>
+    </form>
+  </div>
 </div>
-  <script src="js/app.js"></script>
+
+<script src="js/app.js"></script>
 </body>
 </html>
