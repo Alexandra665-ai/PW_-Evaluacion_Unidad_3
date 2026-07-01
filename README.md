@@ -67,13 +67,13 @@ actividad_2_5_node/
 1. Clonar el repositorio.
 
 ```
-git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git
+https://github.com/Alexandra665-ai/PW_-Evaluacion_Unidad_3
 ```
 
 2. Entrar a la carpeta del proyecto.
 
 ```
-cd actividad_2_5_node
+cd Evaluacion_Unidad_3
 ```
 
 3. Instalar las dependencias.
@@ -96,17 +96,6 @@ http://localhost:3000
 
 ---
 
-## Características principales
-
-- Diseño responsive.
-- Interfaz moderna.
-- Tarjetas dinámicas.
-- Validaciones en tiempo real.
-- Almacenamiento local mediante LocalStorage.
-- Formulario de solicitud de adopción.
-- Fotografías de las mascotas.
-
----
 
 ## Autor
 
